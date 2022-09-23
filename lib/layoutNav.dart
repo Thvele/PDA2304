@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_pr1_v1/layout3.dart';
-import 'package:flutter_pr1_v1/layout5.dart';
+import 'package:flutter_pr1_v1/LayoutWelcome.dart';
+import 'package:flutter_pr1_v1/LayoutMeditateMain.dart';
 
-import 'layout4.dart';
+import 'LayoutMeditateSessions.dart';
 
 class LayoutNav extends StatefulWidget {
   const LayoutNav({super.key});
