@@ -55,7 +55,8 @@ class _LayoutNavState extends State<LayoutNav> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Layout3()));
+                                    builder: (context) =>
+                                        const LayoutWelcome()));
                           },
                           child: Container(
                             width: 330,
@@ -81,7 +82,8 @@ class _LayoutNavState extends State<LayoutNav> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Layout4()));
+                                    builder: (context) =>
+                                        const LayoutMeditateSessions()));
                           },
                           child: Container(
                             width: 330,
@@ -107,7 +109,8 @@ class _LayoutNavState extends State<LayoutNav> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const Layout5()));
+                                    builder: (context) =>
+                                        const LayoutMeditateMain()));
                           },
                           child: Container(
                             width: 330,

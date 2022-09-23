@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_pr1_v1/layoutNav.dart';
 
-class Layout4 extends StatefulWidget {
-  const Layout4({super.key});
+class LayoutMeditateSessions extends StatefulWidget {
+  const LayoutMeditateSessions({super.key});
 
   @override
-  State<Layout4> createState() => _Layout4State();
+  State<LayoutMeditateSessions> createState() => _LayoutMeditateSessionsState();
 }
 
-class _Layout4State extends State<Layout4> {
+class _LayoutMeditateSessionsState extends State<LayoutMeditateSessions> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
