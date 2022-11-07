@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:pr2/domain/entity/favorite_entity.dart';
 
 class Favorite extends FavoriteEntity{

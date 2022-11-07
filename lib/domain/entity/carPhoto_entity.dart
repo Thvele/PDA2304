@@ -1,10 +1,8 @@
-import 'dart:html';
-
 import 'package:pr2/domain/entity/role_entity.dart';
 
 class CarPhotoEntity{
   late int id;
-  final Blob photo;
+  final String photo;
 
   CarPhotoEntity({required this.photo});
 }

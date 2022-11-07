@@ -1,10 +1,8 @@
-import 'dart:html';
-
 import 'package:pr2/domain/entity/carPhoto_entity.dart';
 
 class CarPhoto extends CarPhotoEntity{
   late int id;
-  final Blob photo;
+  final String photo;
 
   CarPhoto({required this.photo}) : super(photo: photo);
 

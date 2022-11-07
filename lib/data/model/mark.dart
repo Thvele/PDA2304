@@ -7,7 +7,7 @@ class Mark extends MarkEntity{
   Mark ({required this.mark_name}) : super(mark_name: mark_name);
 
   Map<String, dynamic> toMap() {
-    return {'mark': mark_name};
+    return {'mark_name': mark_name};
   }
 
   factory Mark.toFromMap(Map<String, dynamic> json){

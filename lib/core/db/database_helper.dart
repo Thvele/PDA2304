@@ -1,5 +1,3 @@
-import 'dart:html';
-import 'dart:io' as IO_;
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -33,7 +31,7 @@ class DataBaseHelper{
     _appDocumentDirectory = await path_provider.getApplicationDocumentsDirectory();
     _pathDB = join(_appDocumentDirectory.path, 'autosaloon.db');
 
-    if(IO_.Platform.isLinux || IO_.Platform.isWindows || IO_.Platform.isMacOS){
+    if(Platform.isLinux || Platform.isWindows || Platform.isMacOS){
 
       sqfliteFfiInit();
       var db = await databaseFactoryFfi.openDatabase(_pathDB, options: OpenDatabaseOptions(
@@ -88,11 +86,11 @@ class DataBaseHelper{
       db.insert(DataBaseRequest.tableKPPType, KPPType(kpp_type: 'Автомат').toMap());
       db.insert(DataBaseRequest.tableKPPType, KPPType(kpp_type: 'Механика').toMap());
 
-      final img1 = IO_.File('assets/images/3000GT.png').readAsBytesSync();
-      final img2 = IO_.File('assets/images/bmw.jpg').readAsBytesSync();
+      final img1 = File('assets/images/3000GT.png').readAsBytesSync();
+      final img2 = File('assets/images/bmw.jpg').readAsBytesSync();
 
-      db.insert(DataBaseRequest.tableCarPhoto, CarPhoto(photo: Blob(img1)).toMap());
-      db.insert(DataBaseRequest.tableCarPhoto, CarPhoto(photo: Blob(img2)).toMap());
+      db.insert(DataBaseRequest.tableCarPhoto, CarPhoto(photo: img1.toString()).toMap());
+      db.insert(DataBaseRequest.tableCarPhoto, CarPhoto(photo: img2.toString()).toMap());
 
       db.insert(DataBaseRequest.tableCar, Car(car_description: 'Mitsubishi 3000GT', car_cost: 3000000.00, car_year: '2000', car_mark_id: 2, car_engine_id: 1, car_color_id: 2, car_KPPtype_id: 1, car_photo_id: 1).toMap());
       db.insert(DataBaseRequest.tableCar, Car(car_description: 'BMW i8', car_cost: 90000000.00, car_year: '2025', car_mark_id: 1, car_engine_id: 2, car_color_id: 1, car_KPPtype_id: 1, car_photo_id: 2).toMap());
@@ -117,7 +115,6 @@ class DataBaseHelper{
 
   Future<void> onDropDataBase() async {
     _database.close();
-
-    await deleteDatabase(_pathDB);
+    File(_pathDB).delete();
   }
 }

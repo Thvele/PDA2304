@@ -1,5 +1,3 @@
-import 'dart:html';
-
 class KPPTypeEntity{
   late int id;
   final String kpp_type;
