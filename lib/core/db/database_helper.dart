@@ -114,7 +114,11 @@ class DataBaseHelper{
   }
 
   Future<void> onDropDataBase() async {
-    _database.close();
-    File(_pathDB).delete();
+    _database!.close();
+    if (Platform.isWindows) {
+      databaseFactoryFfi.deleteDatabase(_pathDB!);
+    } else {
+      deleteDatabase(_pathDB!);
+    }
   }
 }
