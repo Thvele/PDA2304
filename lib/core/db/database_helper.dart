@@ -1,16 +1,15 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:path/path.dart';
 import 'package:pr2/data/model/car.dart';
 import 'package:pr2/data/model/carColor.dart';
-import 'package:pr2/data/model/carPhoto.dart';
 import 'package:pr2/data/model/engine.dart';
 import 'package:pr2/data/model/favorite.dart';
 import 'package:pr2/data/model/kppType.dart';
 import 'package:pr2/data/model/mark.dart';
 import 'package:pr2/data/model/user.dart';
 import 'package:pr2/data/model/userInfo.dart';
+import 'package:pr2/domain/entity/role_entity.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
@@ -68,8 +67,8 @@ class DataBaseHelper{
       db.insert(DataBaseRequest.tableRole, Role(role: "Администратор").toMap());
       db.insert(DataBaseRequest.tableRole, Role(role: "Пользователь").toMap());
 
-      db.insert(DataBaseRequest.tableUser, User(login: "thvele", password: "123", id_role: 1).toMap());
-      db.insert(DataBaseRequest.tableUser, User(login: "user", password: "user", id_role: 2).toMap());
+      db.insert(DataBaseRequest.tableUser, User(login: "thvele", password: "123abC@111", id_role: RoleEnum.admin).toMap());
+      db.insert(DataBaseRequest.tableUser, User(login: "user", password: "123abC@111", id_role: RoleEnum.user).toMap());
 
       db.insert(DataBaseRequest.tableUserInfo, UserInfo(surname: 'Иванов', name: 'Иван', middlename: 'Иванович', email: 'example@ex.com', id_user: 1).toMap());
       db.insert(DataBaseRequest.tableUserInfo, UserInfo(surname: 'Слободянюк', name: 'Игорь', middlename: 'Сергеевич', email: 'thvele@kist.com', id_user: 2).toMap());
@@ -86,14 +85,8 @@ class DataBaseHelper{
       db.insert(DataBaseRequest.tableKPPType, KPPType(kpp_type: 'Автомат').toMap());
       db.insert(DataBaseRequest.tableKPPType, KPPType(kpp_type: 'Механика').toMap());
 
-      final img1 = File('assets/images/3000GT.png').readAsBytesSync();
-      final img2 = File('assets/images/bmw.jpg').readAsBytesSync();
-
-      db.insert(DataBaseRequest.tableCarPhoto, CarPhoto(photo: img1.toString()).toMap());
-      db.insert(DataBaseRequest.tableCarPhoto, CarPhoto(photo: img2.toString()).toMap());
-
-      db.insert(DataBaseRequest.tableCar, Car(car_description: 'Mitsubishi 3000GT', car_cost: 3000000.00, car_year: '2000', car_mark_id: 2, car_engine_id: 1, car_color_id: 2, car_KPPtype_id: 1, car_photo_id: 1).toMap());
-      db.insert(DataBaseRequest.tableCar, Car(car_description: 'BMW i8', car_cost: 90000000.00, car_year: '2025', car_mark_id: 1, car_engine_id: 2, car_color_id: 1, car_KPPtype_id: 1, car_photo_id: 2).toMap());
+      db.insert(DataBaseRequest.tableCar, Car(car_description: 'Mitsubishi 3000GT', car_cost: 3000000.00, car_year: '2000', car_mark_id: 2, car_engine_id: 1, car_color_id: 2, car_KPPtype_id: 1, car_photo: 'assets/images/3000GT.png').toMap());
+      db.insert(DataBaseRequest.tableCar, Car(car_description: 'BMW i8', car_cost: 90000000.00, car_year: '2025', car_mark_id: 1, car_engine_id: 2, car_color_id: 1, car_KPPtype_id: 1, car_photo: 'assets/images/bmw.jpg').toMap());
     
       db.insert(DataBaseRequest.tableFavorite, Favorite(favorite_car_id: 1, favorite_user_id: 1).toMap());
       db.insert(DataBaseRequest.tableFavorite, Favorite(favorite_car_id: 2, favorite_user_id: 2).toMap());
@@ -114,11 +107,11 @@ class DataBaseHelper{
   }
 
   Future<void> onDropDataBase() async {
-    dataBase!.close();
+    dataBase.close();
     if (Platform.isWindows || Platform.isMacOS || Platform.isLinux) {
-      databaseFactoryFfi.deleteDatabase(_pathDB!);
+      databaseFactoryFfi.deleteDatabase(_pathDB);
     } else {
-      deleteDatabase(_pathDB!);
+      deleteDatabase(_pathDB);
     }
   }
 }

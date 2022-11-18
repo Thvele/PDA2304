@@ -8,7 +8,6 @@ abstract class DataBaseRequest{
   static const String tableEngine = 'Engine';
   static const String tableCarColor = 'CarColor';
   static const String tableKPPType = 'KPPType';
-  static const String tableCarPhoto = 'CarPhoto';
 
   static const List<String> tableList = [
     tableRole,
@@ -20,7 +19,6 @@ abstract class DataBaseRequest{
     tableEngine,
     tableCarColor,
     tableKPPType,
-    tableCarPhoto
   ];
   static const List<String> tableCreateList = [
     _createTableRole,
@@ -30,7 +28,6 @@ abstract class DataBaseRequest{
     _createTableEngine,
     _createTableCarColor,
     _createTableKPPType,
-    _createTableCarPhoto,
     _createTableCar,
     _createTableFavorite
   ];
@@ -56,11 +53,8 @@ abstract class DataBaseRequest{
   static const String _createTableKPPType =
       'CREATE TABLE "$tableKPPType" ("id" INTEGER,"kpp_type" TEXT NOT NULL UNIQUE, PRIMARY KEY("id" AUTOINCREMENT))';
 
-  static const String _createTableCarPhoto =
-      'CREATE TABLE "$tableCarPhoto" ("id" INTEGER,"photo" BLOB NOT NULL, "photo_description", PRIMARY KEY("id" AUTOINCREMENT))';
-
   static const String _createTableCar =
-      'CREATE TABLE "$tableCar" ("id" INTEGER, "car_description" TEXT NOT NULL, "car_cost" DECIMAL NOT NULL, "car_year" TEXT NOT NULL, "car_mark_id" INTEGER NOT NULL, "car_engine_id" INTEGER NOT NULL, "car_color_id" INTEGER NOT NULL, "car_KPPtype_id" INTEGER NOT NULL, "car_photo_id" INTEGER NOT NULL, PRIMARY KEY("id" AUTOINCREMENT), FOREIGN KEY("car_mark_id") REFERENCES "$tableMark"("id"), FOREIGN KEY("car_engine_id") REFERENCES "$tableEngine"("id"), FOREIGN KEY("car_color_id") REFERENCES "$tableCarColor"("id"), FOREIGN KEY("car_KPPtype_id") REFERENCES "$tableKPPType"("id"), FOREIGN KEY("car_photo_id") REFERENCES "$tableCarPhoto"("id"))';
+      'CREATE TABLE "$tableCar" ("id" INTEGER, "car_description" TEXT NOT NULL, "car_cost" DECIMAL NOT NULL, "car_year" TEXT NOT NULL, "car_mark_id" INTEGER NOT NULL, "car_engine_id" INTEGER NOT NULL, "car_color_id" INTEGER NOT NULL, "car_KPPtype_id" INTEGER NOT NULL, "car_photo" TEXT NOT NULL, PRIMARY KEY("id" AUTOINCREMENT), FOREIGN KEY("car_mark_id") REFERENCES "$tableMark"("id"), FOREIGN KEY("car_engine_id") REFERENCES "$tableEngine"("id"), FOREIGN KEY("car_color_id") REFERENCES "$tableCarColor"("id"), FOREIGN KEY("car_KPPtype_id") REFERENCES "$tableKPPType"("id"))';
   
   static const String _createTableFavorite =
       'CREATE TABLE "$tableFavorite" ("id" INTEGER, "favorite_car_id" INTEGER NOT NULL, "favorite_user_id" INTEGER NOT NULL, PRIMARY KEY("id" AUTOINCREMENT), FOREIGN KEY("favorite_car_id") REFERENCES "$tableCar"("id"), FOREIGN KEY("favorite_user_id") REFERENCES "$tableUser"("id"))';

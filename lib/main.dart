@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:pr2/app_route.dart';
 import 'package:pr2/core/db/database_helper.dart';
 
-void main() {
-
+void main() async {
+  
+  WidgetsFlutterBinding.ensureInitialized();
+  await DataBaseHelper.instance.init();
   runApp(const App());
 }
 
