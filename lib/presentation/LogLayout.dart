@@ -162,23 +162,24 @@ class LoginState extends State<Login>{
         );
         
         result.fold((l){
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Неверный логин или пароль!'),
-        ),
-      );
-    }, 
-    (r) {
-      switch(r){
-        case RoleEnum.admin: {
-          Navigator.pushReplacementNamed(context, adminScreen);
-          break;
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Неверный логин или пароль!'),
+            ),
+          );
+        }, 
+
+      (r) {
+        switch(r){
+          case RoleEnum.admin: {
+            Navigator.pushReplacementNamed(context, adminScreen);
+            break;
+          }
+          case RoleEnum.user: {
+            Navigator.pushReplacementNamed(context, userScreen);
+            break;
+          }
         }
-        case RoleEnum.user: {
-          Navigator.pushReplacementNamed(context, userScreen);
-          break;
-        }
-      }
-    });
+      });
   }
 }

@@ -65,6 +65,9 @@ class RegistrationState extends State<Registration>{
                   if(value.length < 4){
                     return 'Логин должен быть не меньше 4 символов!';
                   }
+                  if(value.length > 100){
+                    return 'Логин должен быть не больше 100 символов!';
+                  }
                   return null;
                 }
               ),),
