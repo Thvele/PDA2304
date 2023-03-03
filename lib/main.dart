@@ -3,7 +3,6 @@ import 'dart:html';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'firebase_options.dart';
 
 var emailAuth = "";
@@ -50,8 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final TextEditingController capcha = TextEditingController();
 
     late ConfirmationResult confirmationResult_;
-
-    final GoogleSignIn googleSignIn = GoogleSignIn();
 
     var acs = ActionCodeSettings(
     url: window.location.href,
@@ -310,40 +307,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           child: const Align(
                               alignment: Alignment.center,
                               child: Text("Войти как гость",
-                                  textAlign: TextAlign.center)),
-                        ),
-                      ),
-                    ),
-                    const Padding(padding: EdgeInsets.only(bottom: 35)),
-                    SizedBox(
-                      width: 250,
-                      height: 50,
-                      child: Material(
-                        color: Colors.indigo,
-                        borderRadius: BorderRadius.circular(5),
-                        child: InkWell(
-                          onTap: () async {
-                            try {
-                              final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
-                              final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-
-                              final AuthCredential credential = GoogleAuthProvider.credential(
-                                idToken: googleSignInAuthentication.idToken, 
-                                accessToken: googleSignInAuthentication.accessToken
-                              );
-
-                              await FirebaseAuth.instance.signInWithCredential(credential);
-                              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Успешная авторизация!')));
-                          } catch(e){
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-                            print(e.toString());
-                          }},
-                          highlightColor: Colors.white.withOpacity(0.3),
-                          splashColor: Colors.indigo.withOpacity(0.5),
-                          borderRadius: BorderRadius.circular(5),
-                          child: const Align(
-                              alignment: Alignment.center,
-                              child: Text("Войти через Google",
                                   textAlign: TextAlign.center)),
                         ),
                       ),
